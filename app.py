@@ -38,15 +38,13 @@ def main():
             "temperature": 0.2,
             "maxTokens": 10
         }
-        print(f"Sending request to LLM with data: {data}")
+
         chat_response = requests.post(chat_url, json=data, headers=headers)
         print(chat_response.json())
         if chat_response.status_code == 200:
             answer = chat_response.json().get("choices", [{}])[0].get("text", '')
             print(f"Answer from LLM: {answer}")
 
-
-    # TODO: send POST request adres: dotenv.get("TASK1_URL")
         final_response = requests.post(
             target_url,
             data={
@@ -58,7 +56,7 @@ def main():
                 "Content-Type": "application/x-www-form-urlencoded"
             }
         )
-        print(f"Final response status code: {final_response.status_code}")
+
         print(f"Final response content: {final_response.text}")
     
 main()
